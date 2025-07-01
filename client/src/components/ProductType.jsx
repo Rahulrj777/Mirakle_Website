@@ -14,7 +14,7 @@ const ProductType = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get("${API_BASE}/api/banners");
+      const res = await axios.get(`${API_BASE}/api/banners`);
       const filtered = res.data.filter((b) => b.type === "product-type");
       setProductTypes(filtered);
     };

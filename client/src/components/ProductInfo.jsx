@@ -14,7 +14,7 @@ const SliderSection = () => {
   const intervalRef = useRef(null);
 
   useEffect(() => {
-    axios.get("${API_BASE}/api/banners").then((res) => {
+    axios.get(`${API_BASE}/api/banners`).then((res) => {
       const sliders = res.data.filter((img) => img.type === "slider");
       setOriginalImages(sliders);
 

@@ -30,26 +30,28 @@ const LoginSignUp = () => {
 
   const handleSignIn = async () => {
     try {
-      const res = await axios.post("${API_BASE}/api/login", {
+        const res = await axios.post(`${API_BASE}/api/login`, {
         email,
         password,
-      });
-      localStorage.setItem("token", res.data.token);
-      alert("✅ Logged in successfully!");
-      navigate("/"); // Redirect to home/dashboard
+        });
+        localStorage.setItem("token", res.data.token);
+        alert("✅ Logged in successfully!");
+        navigate("/"); // Redirect to home/dashboard
     } catch (error) {
-      alert("❌ " + error.response.data.message);
+        alert("❌ " + error.response?.data?.message || "Login failed");
     }
-  };
+    };
 
   const handleForgotPassword = () => {
     const userEmail = prompt("Enter your registered email:");
     if (!userEmail) return;
     axios
-      .post("${API_BASE}/api/forgot-password", { email: userEmail })
-      .then(() => alert("📩 Reset email sent!"))
-      .catch((err) => alert("❌ " + err.response.data.message));
-  };
+        .post(`${API_BASE}/api/forgot-password`, { email: userEmail })
+        .then(() => alert("📩 Reset email sent!"))
+        .catch((err) =>
+        alert("❌ " + err.response?.data?.message || "Error sending reset email")
+        );
+    };
 
   return (
     <div className="login-container bg-green-100">

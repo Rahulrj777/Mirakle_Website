@@ -8,7 +8,7 @@ const ProductOffer = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get("${API_BASE}/api/banners").then((res) => {
+    axios.get(`${API_BASE}/api/banners`).then((res) => {
       const allBanners = res.data;
       const side = allBanners.filter((img) => img.type === "side");
       const offers = allBanners.filter((img) => img.type === "offer");
