@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-const API_BASE = "https://mirakle-website-server.onrender.com";
 import axios from 'axios';
+import { API_BASE } from "../utils/api"; 
 
 const AdminProductUpload = () => {
   const [name, setName] = useState('');

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 const API_BASE = "https://mirakle-website-server.onrender.com";
 import axios from 'axios';
 import SparkMD5 from 'spark-md5';
+import { API_BASE } from "../utils/api"; 
 
 const AdminBannerUpload = () => {
   const [image, setImage] = useState(null);
