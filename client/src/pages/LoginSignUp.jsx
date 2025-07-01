@@ -12,7 +12,7 @@ const LoginSignUp = () => {
 
   const handleSignUp = async () => {
     try {
-      const res = await axios.post("http://localhost:7000/api/signup", {
+      const res = await axios.post("https://mirakle-backend.onrender.com/api/signup", {
         name,
         email,
         password,

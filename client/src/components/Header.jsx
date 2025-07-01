@@ -1,21 +1,50 @@
-// src/components/Header.jsx
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { FaRegUser } from "react-icons/fa";
 import { useSelector } from 'react-redux';
 import logo from '../assets/logo.png';
+import { useState, useEffect, useRef } from 'react';
 
 const Header = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const cartItems = useSelector(state => state.cart);
 
   const isActive = (path) => location.pathname === path;
 
+  const [user, setUser] = useState(null);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const stored = localStorage.getItem("mirakleUser");
+    if (stored) {
+      setUser(JSON.parse(stored));
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("mirakleUser");
+    setUser(null);
+    setShowDropdown(false);
+    navigate("/");
+  };
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowDropdown(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-150 shadow-md">
-      {/* Top Section: Logo + Search + Icons */}
+    <header className="sticky top-0 z-50 shadow-md">
       <div className="bg-white px-4 py-3 max-w-7xl mx-auto flex items-center justify-between">
-        {/* Logo only */}
+        {/* Logo */}
         <Link to="/">
           <img src={logo} alt="logo" className="w-25 h-15 object-contain" />
         </Link>
@@ -30,10 +59,35 @@ const Header = () => {
         </div>
 
         {/* Icons */}
-        <div className="flex items-center gap-5 text-[24px]">
-          <Link to="/login_signup">
-            <FaRegUser className="text-black" />
-          </Link>
+        <div className="flex items-center gap-5 text-[24px] relative">
+          {user ? (
+            <div ref={dropdownRef} className="relative">
+              <div
+                className="bg-green-600 text-white w-10 h-10 flex items-center justify-center rounded-full cursor-pointer text-lg font-semibold"
+                onClick={() => setShowDropdown(!showDropdown)}
+              >
+                {user.name?.charAt(0).toUpperCase() || user.email.charAt(0).toUpperCase()}
+              </div>
+              {showDropdown && (
+                <div className="absolute top-12 right-0 bg-white shadow-md rounded-md z-50 w-40 py-2">
+                  <p className="px-4 py-2 text-gray-700 text-sm">{user.name || user.email}</p>
+                  <hr />
+                  <button
+                    onClick={handleLogout}
+                    className="w-full text-left px-4 py-2 hover:bg-gray-100 text-sm text-red-600"
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <Link to="/login_signup">
+              <FaRegUser className="text-black" />
+            </Link>
+          )}
+
+          {/* Cart icon */}
           <Link to="/AddToCart" className="relative">
             <HiOutlineShoppingBag className="text-black" />
             {cartItems.length > 0 && (
@@ -45,7 +99,7 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Bottom Nav Bar (Green background) */}
+      {/* Nav Bar */}
       <nav className="bg-green-600">
         <ul className="max-w-7xl mx-auto px-4 py-2 flex justify-center gap-6 font-semibold text-white text-lg">
           {[
