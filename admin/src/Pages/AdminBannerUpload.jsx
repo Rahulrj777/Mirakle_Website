@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+const API_BASE = "https://mirakle-website-server.onrender.com";
 import axios from 'axios';
 import SparkMD5 from 'spark-md5';
 
@@ -44,7 +45,7 @@ const AdminBannerUpload = () => {
   };
 
   const fetchBanners = async () => {
-    const res = await axios.get('http://localhost:7000/api/banners');
+    const res = await axios.get('${API_BASE}/api/banners');
     setBanners(res.data);
   };
 
@@ -112,7 +113,7 @@ const AdminBannerUpload = () => {
       }
 
       try {
-        await axios.put(`http://localhost:7000/api/banners/${editingBanner._id}`, formData, {
+        await axios.put(`${API_BASE}/api/banners/${editingBanner._id}`, formData, {
           headers: { 'Content-Type': 'multipart/form-data' },
         });
         fetchBanners();
@@ -138,7 +139,7 @@ const AdminBannerUpload = () => {
       formData.append('hash', hash);
 
       try {
-        await axios.post('http://localhost:7000/api/banners/upload', formData, {
+        await axios.post('${API_BASE}/api/banners/upload', formData, {
           headers: { 'Content-Type': 'multipart/form-data' },
         });
         alert('Banner uploaded successfully');
@@ -166,7 +167,7 @@ const AdminBannerUpload = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:7000/api/banners/${id}`);
+      await axios.delete(`${API_BASE}/api/banners/${id}`);
       fetchBanners();
     } catch (err) {
       alert('Failed to delete');
@@ -255,7 +256,7 @@ const AdminBannerUpload = () => {
           .map((banner) => (
             <div key={banner._id} className="border p-3 rounded shadow relative">
               <div className="relative">
-                <img src={`http://localhost:7000${banner.imageUrl}`} alt={banner.type} className="w-full h-40 object-cover rounded mb-2" />
+                <img src={`${API_BASE}${banner.imageUrl}`} alt={banner.type} className="w-full h-40 object-cover rounded mb-2" />
                 {banner.discountPercent > 0 && (
                   <span className="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-md">
                     {banner.discountPercent}% OFF

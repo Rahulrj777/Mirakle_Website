@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+const API_BASE = "https://mirakle-website-server.onrender.com";
 import axios from 'axios';
 
 const AdminProductUpload = () => {
@@ -21,7 +22,7 @@ const AdminProductUpload = () => {
 
   const fetchProducts = async () => {
     try {
-      const res = await axios.get('http://localhost:7000/api/products/all-products');
+      const res = await axios.get('${API_BASE}/api/products/all-products');
       setProducts(res.data);
     } catch (err) {
       console.error('Fetch error:', err);
@@ -138,10 +139,10 @@ const AdminProductUpload = () => {
 
     try {
       if (editingProduct) {
-        await axios.put(`http://localhost:7000/api/products/${editingProduct._id}`, formData);
+        await axios.put(`${API_BASE}/api/products/${editingProduct._id}`, formData);
         alert('Product updated');
       } else {
-        await axios.post('http://localhost:7000/api/products/upload-product', formData);
+        await axios.post('${API_BASE}/api/products/upload-product', formData);
         alert('Product uploaded');
       }
       resetForm();
@@ -177,7 +178,7 @@ const AdminProductUpload = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:7000/api/products/${id}`);
+      await axios.delete(`${API_BASE}/api/products/${id}`);
       fetchProducts();
     } catch (err) {
       alert('Delete failed');
@@ -186,7 +187,7 @@ const AdminProductUpload = () => {
 
   const toggleStock = async (id, currentStatus) => {
     try {
-      await axios.put(`http://localhost:7000/api/products/${id}/toggle-stock`, {
+      await axios.put(`${API_BASE}/api/products/${id}/toggle-stock`, {
         isOutOfStock: !currentStatus,
       });
       fetchProducts();
@@ -305,7 +306,7 @@ const AdminProductUpload = () => {
         <div className="grid grid-cols-4 gap-2 mt-4">
           {existingImages.map((img, i) => (
             <div key={i} className="relative">
-              <img src={`http://localhost:7000${img}`} className="w-full h-24 object-cover rounded" />
+              <img src={`${API_BASE}${img}`} className="w-full h-24 object-cover rounded" />
               <button onClick={() => handleImageRemove(img)} className="absolute top-0 right-0 bg-red-500 text-white text-xs px-1">X</button>
             </div>
           ))}
@@ -327,7 +328,7 @@ const AdminProductUpload = () => {
             <img
               src={
                 product?.images?.others?.[0]
-                  ? `http://localhost:7000${product.images.others[0]}`
+                  ? `${API_BASE}${product.images.others[0]}`
                   : 'https://via.placeholder.com/150'
               }
               alt={product.title}
