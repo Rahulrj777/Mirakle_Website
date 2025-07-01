@@ -42,7 +42,7 @@ const Header = () => {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 shadow-md">
+    <header className="sticky top-0 z-150 shadow-md">
       <div className="bg-white px-4 py-3 max-w-7xl mx-auto flex items-center justify-between">
         {/* Logo */}
         <Link to="/">
