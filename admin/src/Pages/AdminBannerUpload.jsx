@@ -45,7 +45,7 @@ const AdminBannerUpload = () => {
   };
 
   const fetchBanners = async () => {
-    const res = await axios.get('${API_BASE}/api/banners');
+    const res = await axios.get(`${API_BASE}/api/banners`);
     setBanners(res.data);
   };
 
@@ -139,7 +139,7 @@ const AdminBannerUpload = () => {
       formData.append('hash', hash);
 
       try {
-        await axios.post('${API_BASE}/api/banners/upload', formData, {
+        await axios.post(`${API_BASE}/api/banners/upload`, formData, {
           headers: { 'Content-Type': 'multipart/form-data' },
         });
         alert('Banner uploaded successfully');

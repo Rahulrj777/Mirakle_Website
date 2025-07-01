@@ -22,7 +22,7 @@ const AdminProductUpload = () => {
 
   const fetchProducts = async () => {
     try {
-      const res = await axios.get('${API_BASE}/api/products/all-products');
+      const res = await axios.get(`${API_BASE}/api/products/all-products`);
       setProducts(res.data);
     } catch (err) {
       console.error('Fetch error:', err);
@@ -142,7 +142,7 @@ const AdminProductUpload = () => {
         await axios.put(`${API_BASE}/api/products/${editingProduct._id}`, formData);
         alert('Product updated');
       } else {
-        await axios.post('${API_BASE}/api/products/upload-product', formData);
+        await axios.post(`${API_BASE}/api/products/upload-product`, formData);
         alert('Product uploaded');
       }
       resetForm();
