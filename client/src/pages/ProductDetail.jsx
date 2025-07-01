@@ -17,7 +17,7 @@ const ProductDetail = () => {
   }, [id]);
 
   const fetchProduct = async () => {
-    const res = await axios.get(`http://localhost:7000/api/products/all-products`);
+    const res = await axios.get(`${API_BASE}/api/products/all-products`);
     const found = res.data.find(p => p._id === id);
     if (found) {
       setProduct(found);
@@ -33,7 +33,7 @@ const ProductDetail = () => {
     if (!rating || !comment) return setError("Please provide both star and review.");
 
     try {
-      await axios.post(`http://localhost:7000/api/products/${id}/review`, 
+      await axios.post(`${API_BASE}/api/products/${id}/review`, 
         { rating, comment },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -59,10 +59,10 @@ const ProductDetail = () => {
       <div className="grid md:grid-cols-2 gap-8">
         {/* Image Preview */}
         <div>
-          <img src={`http://localhost:7000${selectedImage}`} className="w-full h-[400px] object-contain rounded" />
+          <img src={`${API_BASE}${selectedImage}`} className="w-full h-[400px] object-contain rounded" />
           <div className="flex gap-2 mt-2">
             {product.images?.others?.map((img, i) => (
-              <img key={i} src={`http://localhost:7000${img}`}
+              <img key={i} src={`${API_BASE}${img}`}
                 onClick={() => setSelectedImage(img)}
                 className={`w-20 h-20 object-cover border ${selectedImage === img ? 'border-blue-500' : ''}`} />
             ))}

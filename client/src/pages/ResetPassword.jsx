@@ -16,7 +16,7 @@ const ResetPassword = () => {
     }
 
     try {
-      await axios.post("http://localhost:7000/api/reset-password", {
+      await axios.post("${API_BASE}/api/reset-password", {
         token,
         password,
       });

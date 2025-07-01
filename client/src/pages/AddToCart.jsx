@@ -20,7 +20,7 @@ const AddToCart = () => {
           {cartItems.map((item) => (
             <div key={item._id} className="flex border rounded-lg p-4 items-center gap-4 shadow-sm">
               <img
-                src={`http://localhost:7000${item.images?.others?.[0]}`}
+                src={`${API_BASE}${item.images?.others?.[0]}`}
                 alt={item.title}
                 className="w-24 h-24 object-cover rounded"
               />

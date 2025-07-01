@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../Style/login.css";
+import { API_BASE } from '../utils/api';
 
 const LoginSignUp = () => {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -29,7 +30,7 @@ const LoginSignUp = () => {
 
   const handleSignIn = async () => {
     try {
-      const res = await axios.post("http://localhost:7000/api/login", {
+      const res = await axios.post("${API_BASE}/api/login", {
         email,
         password,
       });
@@ -45,7 +46,7 @@ const LoginSignUp = () => {
     const userEmail = prompt("Enter your registered email:");
     if (!userEmail) return;
     axios
-      .post("http://localhost:7000/api/forgot-password", { email: userEmail })
+      .post("${API_BASE}/api/forgot-password", { email: userEmail })
       .then(() => alert("📩 Reset email sent!"))
       .catch((err) => alert("❌ " + err.response.data.message));
   };

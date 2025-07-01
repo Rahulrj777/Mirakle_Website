@@ -29,7 +29,7 @@ const ShopingPage = () => {
 
   const fetchProducts = async () => {
     try {
-      const res = await axios.get('http://localhost:7000/api/products/all-products');
+      const res = await axios.get('${API_BASE}/api/products/all-products');
       setProducts(res.data);
     } catch (err) {
       console.error('Failed to fetch products:', err);
@@ -105,7 +105,7 @@ const ShopingPage = () => {
                   {/* Discount/Stock Badges */}
                   {/* ...same as before... */}
                   <img
-                    src={`http://localhost:7000${frontImage}`}
+                    src={`${API_BASE}${frontImage}`}
                     alt={product.title}
                     className="w-full h-40 object-cover hover:scale-105 transition-transform duration-300 rounded-t"
                   />

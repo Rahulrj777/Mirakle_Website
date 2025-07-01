@@ -10,7 +10,7 @@ const OfferPage = () => {
 
   const fetchOfferProducts = async () => {
     try {
-      const res = await axios.get('http://localhost:7000/api/products/all-products');
+      const res = await axios.get('${API_BASE}/api/products/all-products');
       const filtered = res.data.filter((p) => p.discountPercent > 0);
       setOfferProducts(filtered);
     } catch (err) {
@@ -52,7 +52,7 @@ const OfferPage = () => {
                 )}
 
                 <img
-                  src={`http://localhost:7000${frontImage}`}
+                  src={`${API_BASE}${frontImage}`}
                   alt={product.title}
                   className={`w-full h-48 object-cover rounded-t-lg ${
                     isOut ? 'grayscale' : ''

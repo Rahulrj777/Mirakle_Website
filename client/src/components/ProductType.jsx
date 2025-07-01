@@ -14,7 +14,7 @@ const ProductType = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get("http://localhost:7000/api/banners");
+      const res = await axios.get("${API_BASE}/api/banners");
       const filtered = res.data.filter((b) => b.type === "product-type");
       setProductTypes(filtered);
     };
@@ -67,7 +67,7 @@ const ProductType = () => {
                 <div className="p-4 rounded-lg shadow-md text-center border h-full flex flex-col justify-between cursor-pointer" onClick={() => navigate("/shop/allproduct")}>
                   <div className="relative w-full h-[150px] mb-2">
                     <img
-                      src={`http://localhost:7000${item.imageUrl}`}
+                      src={`${API_BASE}${item.imageUrl}`}
                       alt={item.title || "Product"}
                       className="w-full h-full object-contain"
                     />

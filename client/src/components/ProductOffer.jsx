@@ -8,7 +8,7 @@ const ProductOffer = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get("http://localhost:7000/api/banners").then((res) => {
+    axios.get("${API_BASE}/api/banners").then((res) => {
       const allBanners = res.data;
       const side = allBanners.filter((img) => img.type === "side");
       const offers = allBanners.filter((img) => img.type === "offer");
@@ -35,7 +35,7 @@ const ProductOffer = () => {
                 className="rounded-lg overflow-hidden shadow hover:shadow-lg transition cursor-pointer"
               >
                 <img
-                  src={`http://localhost:7000${img.imageUrl}`}
+                  src={`${API_BASE}${img.imageUrl}`}
                   alt="Best Seller"
                   className="w-full h-[280px] object-cover hover:scale-105 transition-transform duration-300"
                 />
@@ -61,7 +61,7 @@ const ProductOffer = () => {
                 className="rounded-lg overflow-hidden shadow hover:shadow-lg transition"
               >
                 <img
-                  src={`http://localhost:7000${img.imageUrl}`}
+                  src={`${API_BASE}${img.imageUrl}`}
                   alt="Offer"
                   className="w-full h-[280px] object-cover hover:scale-105 transition-transform duration-300"
                 />

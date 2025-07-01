@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+const API_BASE = "https://mirakle-website-server.onrender.com";
 
 const SliderSection = () => {
   const [originalImages, setOriginalImages] = useState([]);
@@ -13,7 +14,7 @@ const SliderSection = () => {
   const intervalRef = useRef(null);
 
   useEffect(() => {
-    axios.get("http://localhost:7000/api/banners").then((res) => {
+    axios.get("${API_BASE}/api/banners").then((res) => {
       const sliders = res.data.filter((img) => img.type === "slider");
       setOriginalImages(sliders);
 
@@ -88,7 +89,7 @@ const SliderSection = () => {
         {sliderImages.map((img, i) => (
           <img
             key={i}
-            src={`http://localhost:7000${img.imageUrl}`}
+            src={`${API_BASE}${img.imageUrl}`}
             alt="slider"
             className="w-full h-full object-cover flex-shrink-0"
             style={{ width: `${100 / sliderImages.length}%` }}
