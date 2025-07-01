@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { API_BASE } from "../utils/api"; 
 
 const ResetPassword = () => {
   const { token } = useParams(); // URL param from email

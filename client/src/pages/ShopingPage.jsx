@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import { FiSearch } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
+import { API_BASE } from "../utils/api"; 
 
 const ShopingPage = () => {
   const [products, setProducts] = useState([]);

@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
-const API_BASE = "https://mirakle-website-server.onrender.com";
+import { API_BASE } from "../utils/api"; 
 
 const SliderSection = () => {
   const [originalImages, setOriginalImages] = useState([]);

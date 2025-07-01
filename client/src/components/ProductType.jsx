@@ -5,7 +5,7 @@ import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import { useNavigate } from "react-router-dom";
-import { API_BASE } from "../utils/api"; // ✅ Make sure this file exists and exports the base URL
+import { API_BASE } from "../utils/api";
 
 const ProductType = () => {
   const [productTypes, setProductTypes] = useState([]);

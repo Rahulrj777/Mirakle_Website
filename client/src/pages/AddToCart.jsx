@@ -1,10 +1,10 @@
-import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   incrementQuantity,
   decrementQuantity,
   removeFromCart,
 } from '../Redux/cartSlice';    
+import { API_BASE } from "../utils/api"; 
 
 const AddToCart = () => {
   const cartItems = useSelector((state) => state.cart);
